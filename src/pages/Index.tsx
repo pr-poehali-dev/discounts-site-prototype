@@ -9,78 +9,398 @@ import { useToast } from '@/hooks/use-toast';
 
 const categories = [
   { id: 'all', name: 'Все категории', icon: 'Grid3x3' },
-  { id: 'electronics', name: 'Электроника', icon: 'Laptop' },
+  { id: 'marketplace', name: 'Маркетплейсы', icon: 'ShoppingCart' },
   { id: 'fashion', name: 'Одежда', icon: 'ShoppingBag' },
   { id: 'food', name: 'Еда и доставка', icon: 'UtensilsCrossed' },
   { id: 'travel', name: 'Путешествия', icon: 'Plane' },
-  { id: 'beauty', name: 'Красота', icon: 'Sparkles' }
+  { id: 'beauty', name: 'Красота', icon: 'Sparkles' },
+  { id: 'services', name: 'Сервисы', icon: 'Wrench' }
 ];
 
 const promoCodes = [
   {
     id: 1,
-    title: 'Скидка 30% на всё',
-    store: 'TechStore',
-    code: 'TECH30',
-    discount: '30%',
-    category: 'electronics',
+    title: 'Скидка на первый заказ',
+    store: 'Подружка',
+    code: 'WELCOME2024',
+    discount: '15%',
+    category: 'beauty',
     validUntil: '2025-12-31',
-    description: 'Получите скидку 30% на любую технику',
+    description: 'Скидка 15% на первый заказ в Подружке',
     hot: true
   },
   {
     id: 2,
-    title: 'Бесплатная доставка',
-    store: 'FashionHub',
-    code: 'FREESHIP',
-    discount: '100% на доставку',
-    category: 'fashion',
-    validUntil: '2025-11-30',
-    description: 'Бесплатная доставка при заказе от 2000₽',
+    title: 'Кешбэк за покупки',
+    store: 'Петрович',
+    code: 'CASHBACK500',
+    discount: '500₽',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Кешбэк 500₽ при заказе от 5000₽',
     hot: false
   },
   {
     id: 3,
-    title: '500₽ на первый заказ',
-    store: 'FoodDelivery',
-    code: 'FIRST500',
-    discount: '500₽',
-    category: 'food',
-    validUntil: '2025-12-15',
-    description: 'Скидка 500₽ для новых пользователей',
-    hot: true
-  },
-  {
-    id: 4,
-    title: 'Скидка 20% на билеты',
-    store: 'TravelWorld',
-    code: 'TRAVEL20',
-    discount: '20%',
-    category: 'travel',
-    validUntil: '2026-01-31',
-    description: 'Экономьте на путешествиях',
+    title: 'Бесплатная доставка',
+    store: 'ACOOLA',
+    code: 'FREESHIP',
+    discount: 'Доставка 0₽',
+    category: 'fashion',
+    validUntil: '2025-12-31',
+    description: 'Бесплатная доставка при заказе от 3000₽',
     hot: false
   },
   {
-    id: 5,
-    title: '2+1 на косметику',
-    store: 'BeautyShop',
-    code: 'BEAUTY2',
-    discount: '3 по цене 2',
+    id: 4,
+    title: 'Скидка на всё',
+    store: 'SUNLIGHT',
+    code: 'GOLD20',
+    discount: '20%',
     category: 'beauty',
-    validUntil: '2025-12-20',
-    description: 'Три товара по цене двух',
+    validUntil: '2025-12-31',
+    description: 'Скидка 20% на украшения',
+    hot: true
+  },
+  {
+    id: 5,
+    title: 'Промокод на первый заказ',
+    store: 'Shpoti',
+    code: 'FIRST1000',
+    discount: '1000₽',
+    category: 'food',
+    validUntil: '2025-12-31',
+    description: 'Скидка 1000₽ для новых клиентов',
     hot: true
   },
   {
     id: 6,
-    title: 'Скидка 15% на ноутбуки',
-    store: 'GadgetStore',
-    code: 'LAPTOP15',
+    title: 'Скидка на технику',
+    store: 'KOLFAru',
+    code: 'TECH15',
     discount: '15%',
-    category: 'electronics',
-    validUntil: '2025-12-10',
-    description: 'Специальное предложение на ноутбуки',
+    category: 'marketplace',
+    validUntil: '2025-12-31',
+    description: 'Скидка 15% на технику и электронику',
+    hot: false
+  },
+  {
+    id: 7,
+    title: 'Яндекс 360 со скидкой',
+    store: 'Яндекс 360',
+    code: 'YEAR2024',
+    discount: '30%',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Скидка 30% на подписку Яндекс 360',
+    hot: true
+  },
+  {
+    id: 8,
+    title: 'Скидка на всё',
+    store: 'SmallFamily',
+    code: 'FAMILY20',
+    discount: '20%',
+    category: 'fashion',
+    validUntil: '2025-12-31',
+    description: 'Скидка 20% на детскую одежду',
+    hot: false
+  },
+  {
+    id: 9,
+    title: 'Дополнительная скидка',
+    store: 'КупиВип',
+    code: 'VIP500',
+    discount: '500₽',
+    category: 'marketplace',
+    validUntil: '2025-12-31',
+    description: 'Дополнительная скидка 500₽ на всё',
+    hot: false
+  },
+  {
+    id: 10,
+    title: 'Промокод на заказ',
+    store: 'АСИС',
+    code: 'ASIS2024',
+    discount: '10%',
+    category: 'fashion',
+    validUntil: '2025-12-31',
+    description: 'Скидка 10% на одежду и обувь',
+    hot: false
+  },
+  {
+    id: 11,
+    title: 'Скидка на первый заказ',
+    store: 'Alfa-Box',
+    code: 'ALFA15',
+    discount: '15%',
+    category: 'food',
+    validUntil: '2025-12-31',
+    description: 'Скидка 15% на первую коробку',
+    hot: false
+  },
+  {
+    id: 12,
+    title: 'Скидка на путешествия',
+    store: 'Яндекс Путешествия',
+    code: 'TRAVEL1000',
+    discount: '1000₽',
+    category: 'travel',
+    validUntil: '2025-12-31',
+    description: 'Скидка 1000₽ на отели',
+    hot: true
+  },
+  {
+    id: 13,
+    title: 'Бонусы на первый заказ',
+    store: 'Ozon',
+    code: 'OZON500',
+    discount: '500₽',
+    category: 'marketplace',
+    validUntil: '2025-12-31',
+    description: 'Получите 500 баллов при регистрации',
+    hot: true
+  },
+  {
+    id: 14,
+    title: 'Скидка на доставку',
+    store: 'Деликатесыч',
+    code: 'DELIVERY0',
+    discount: 'Доставка 0₽',
+    category: 'food',
+    validUntil: '2025-12-31',
+    description: 'Бесплатная доставка продуктов',
+    hot: false
+  },
+  {
+    id: 15,
+    title: 'Кешбэк баллами',
+    store: 'Билайн',
+    code: 'BEELINE20',
+    discount: '20%',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Кешбэк 20% баллами на услуги',
+    hot: false
+  },
+  {
+    id: 16,
+    title: 'Промокод Яндекс Еды',
+    store: 'Яндекс Еда',
+    code: 'YAFOOD',
+    discount: '25%',
+    category: 'food',
+    validUntil: '2025-12-31',
+    description: 'Скидка 25% на первый заказ',
+    hot: true
+  },
+  {
+    id: 17,
+    title: 'Скидка на такси',
+    store: 'Яндекс Такси',
+    code: 'TAXI300',
+    discount: '300₽',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Скидка 300₽ на первые поездки',
+    hot: false
+  },
+  {
+    id: 18,
+    title: 'Скидка на косметику',
+    store: 'Wildberries',
+    code: 'WB2024',
+    discount: '15%',
+    category: 'marketplace',
+    validUntil: '2025-12-31',
+    description: 'Дополнительная скидка 15%',
+    hot: true
+  },
+  {
+    id: 19,
+    title: 'Промокод на музыку',
+    store: 'Яндекс Музыка',
+    code: 'MUSIC3M',
+    discount: '3 месяца',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: '3 месяца подписки по цене 1',
+    hot: true
+  },
+  {
+    id: 20,
+    title: 'Скидка в аптеке',
+    store: 'Eapteka',
+    code: 'HEALTH10',
+    discount: '10%',
+    category: 'beauty',
+    validUntil: '2025-12-31',
+    description: 'Скидка 10% на первый заказ',
+    hot: false
+  },
+  {
+    id: 21,
+    title: 'Кешбэк за заказ',
+    store: 'Т-Банк',
+    code: 'TBANK500',
+    discount: '500₽',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Кешбэк 500₽ за открытие счёта',
+    hot: false
+  },
+  {
+    id: 22,
+    title: 'Скидка на всё',
+    store: 'Kenzo',
+    code: 'KENZO20',
+    discount: '20%',
+    category: 'fashion',
+    validUntil: '2025-12-31',
+    description: 'Скидка 20% на коллекцию',
+    hot: false
+  },
+  {
+    id: 23,
+    title: 'Яндекс Маркет',
+    store: 'Яндекс Маркет',
+    code: 'MARKET1000',
+    discount: '1000₽',
+    category: 'marketplace',
+    validUntil: '2025-12-31',
+    description: 'Скидка 1000₽ при заказе от 5000₽',
+    hot: true
+  },
+  {
+    id: 24,
+    title: 'Скидка на авто',
+    store: 'Авито',
+    code: 'AUTO2024',
+    discount: '5%',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Скидка 5% на услуги Авито Авто',
+    hot: false
+  },
+  {
+    id: 25,
+    title: 'Промокод ДоброМарт',
+    store: 'ДоброМарт',
+    category: 'food',
+    code: 'DOBRO15',
+    discount: '15%',
+    validUntil: '2025-12-31',
+    description: 'Скидка 15% на продукты',
+    hot: false
+  },
+  {
+    id: 26,
+    title: 'Скидка на доставку',
+    store: 'Сбермаркет',
+    code: 'SBER500',
+    discount: '500₽',
+    category: 'food',
+    validUntil: '2025-12-31',
+    description: 'Скидка 500₽ на первый заказ',
+    hot: true
+  },
+  {
+    id: 27,
+    title: 'Скидка на такси',
+    store: 'Ситимобил',
+    code: 'CITY200',
+    discount: '200₽',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Промокод 200₽ на поездки',
+    hot: false
+  },
+  {
+    id: 28,
+    title: 'Скидка на покупки',
+    store: 'PREMIER',
+    code: 'PREMIER10',
+    discount: '10%',
+    category: 'marketplace',
+    validUntil: '2025-12-31',
+    description: 'Скидка 10% на всё',
+    hot: false
+  },
+  {
+    id: 29,
+    title: 'Скидка на первый заказ',
+    store: 'Ozon Travel',
+    code: 'OZONTRIP',
+    discount: '1500₽',
+    category: 'travel',
+    validUntil: '2025-12-31',
+    description: 'Скидка 1500₽ на отели',
+    hot: true
+  },
+  {
+    id: 30,
+    title: 'Бесплатная доставка',
+    store: 'Лэтуаль',
+    code: 'LETUAL0',
+    discount: 'Доставка 0₽',
+    category: 'beauty',
+    validUntil: '2025-12-31',
+    description: 'Бесплатная доставка косметики',
+    hot: false
+  },
+  {
+    id: 31,
+    title: 'Промокод на кино',
+    store: 'Okko',
+    code: 'OKKO30',
+    discount: '30 дней',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: '30 дней подписки бесплатно',
+    hot: false
+  },
+  {
+    id: 32,
+    title: 'Скидка на технику',
+    store: 'МТС',
+    code: 'MTS1000',
+    discount: '1000₽',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Скидка 1000₽ на смартфоны',
+    hot: false
+  },
+  {
+    id: 33,
+    title: 'Скидка на игры',
+    store: 'Буки',
+    code: 'BOOK15',
+    discount: '15%',
+    category: 'marketplace',
+    validUntil: '2025-12-31',
+    description: 'Скидка 15% на книги',
+    hot: false
+  },
+  {
+    id: 34,
+    title: 'Промокод на одежду',
+    store: 'Lamoda',
+    code: 'LAMODA20',
+    discount: '20%',
+    category: 'fashion',
+    validUntil: '2025-12-31',
+    description: 'Скидка 20% на новую коллекцию',
+    hot: true
+  },
+  {
+    id: 35,
+    title: 'Скидка Мегафон',
+    store: 'Мегафон',
+    code: 'MEGA500',
+    discount: '500₽',
+    category: 'services',
+    validUntil: '2025-12-31',
+    description: 'Бонус 500₽ при подключении',
     hot: false
   }
 ];
@@ -137,7 +457,7 @@ const Index = () => {
         </div>
 
         <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="mb-12">
-          <TabsList className="grid grid-cols-3 md:grid-cols-6 gap-2 h-auto bg-transparent p-0">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 h-auto bg-transparent p-0">
             {categories.map((category) => (
               <TabsTrigger
                 key={category.id}
